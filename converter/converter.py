@@ -8,4 +8,4 @@ if __name__ == "__main__":
     text_file = open("test_set.txt", "w")
     text_file.write(json_data)
     text_file.close()
-    pass
+    sdf_test.to_csv("cars_test.csv", sep=';', encoding='utf-8', index=True, header=True)

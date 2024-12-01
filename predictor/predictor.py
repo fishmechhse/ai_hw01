@@ -20,3 +20,8 @@ class Predictor:
             obj = items[i]
             ret.append(obj)
         return ret
+
+    def predict_csv(self, df: pd.DataFrame) -> pd.DataFrame:
+        predicted = self.__predictor.predict(df)
+        df['selling_price'] = pd.Series(predicted)
+        return df
