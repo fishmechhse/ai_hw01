@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Depends
+from fastapi import File, UploadFile
+
 import uvicorn
 from pydantic import BaseModel
 from typing import List, Optional
@@ -10,7 +12,7 @@ from predictor.predictor import Predictor
 from trained_pipeline.pipeline import get_pipeline
 from trained_pipeline.trim_transformer import make_data
 from sklearn.metrics import r2_score
-
+from io import BytesIO
 
 class Item(BaseModel):
     name: str
@@ -69,6 +71,22 @@ def predict_items(items: List[Item]) -> List[Item]:
     '''
     predicts = predictor.predict(items)
     return predicts
+
+
+@app.post("/predict_item_csv")
+def upload(file: UploadFile = File(...)):
+    contents = file.file.read()
+    buffer = BytesIO(contents)
+    df = pd.read_csv(buffer, sep=';')
+    buffer.close()
+    file.file.close()
+    res = predictor.predict_csv(df)
+    output = res.to_csv(index=True)
+    return StreamingResponse(
+        iter([output]),
+        media_type='text/csv',
+        headers={"Content-Disposition":
+                     "attachment;filename=prediction.csv"})
 
 
 if __name__ == "__main__":

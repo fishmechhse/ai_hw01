@@ -170,6 +170,17 @@ curl -X 'POST' \
 ```
 ![img.png](screenshots/img_r2.png)
 
+Так же можно отправить csv в эндпоинт `/predict_item_csv` файл у которой в качестве разделителя точка с запятой.
+
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/predict_item_csv' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@cars_test.csv;type=text/csv'
+```
+![img.png](screenshots/img_4.png)
+
 ## С какими сложностями столкнулся:
 Не удалось нормально импортировать кастомный трансформер из коллаба. Пробовал pickle, cloudpickle, joblib. 
 Каждый раз возникала ошибка при загрузке модели при запуске сервиса. При этом загрузка в не модуля сервиса выполнялась нормально. 
