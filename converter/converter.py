@@ -1,8 +1,5 @@
-import csv
 import json
 import pandas as pd
-
-
 
 if __name__ == "__main__":
     sdf_test = pd.read_csv('https://raw.githubusercontent.com/Murcha1990/MLDS_ML_2022/main/Hometasks/HT1/cars_test.csv')

@@ -4,7 +4,6 @@ from sklearn.pipeline import Pipeline
 import numpy as np
 from typing import List
 
-
 class Predictor:
     __pipeline = Pipeline
 

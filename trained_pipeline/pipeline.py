@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from category_encoders.target_encoder import TargetEncoder
 
-from sklearn.metrics import r2_score, mean_squared_error as MSE, root_mean_squared_error as RMSE
+from sklearn.metrics import r2_score, mean_squared_error as MSE
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import GridSearchCV
 
